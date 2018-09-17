@@ -1,18 +1,24 @@
 <template>
   <li>
-      {{comment}}
-      <span><StarRating v-model=rating :read-only=true :star-size=20 :show-rating=false></StarRating></span>
+    {{comment}}
+    <span><StarRating
+    v-model=rating
+    :read-only=true
+    :star-size=20
+    :show-rating=false>
+    </StarRating>
+    </span>
   </li>
 </template>
 
 <script>
-import StarRating from 'vue-star-rating'
-import Reviews from './Reviews'
+import StarRating from 'vue-star-rating';
+
 export default {
-  name: "reviewitem",
+  name: 'reviewitem',
   props: ['comment', 'rating'],
   components: {
-      StarRating
-  }
-}
+    StarRating,
+  },
+};
 </script>

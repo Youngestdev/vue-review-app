@@ -7,15 +7,15 @@
 </template>
 
 <script>
-import Reviews from "./components/Reviews"
-import reviewitem from "./components/Review-Item"
+import Reviews from './components/Reviews';
+import reviewitem from './components/Review-Item';
 
 export default {
-  name: "App",
+  name: 'App',
   components: {
     Reviews,
-    reviewitem
-  }
+    reviewitem,
+  },
 };
 </script>
 
