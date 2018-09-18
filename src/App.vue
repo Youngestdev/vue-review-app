@@ -1,14 +1,13 @@
 <template>
   <div id="app">
     <Reviews>
-    <reviewitem></reviewitem>
     </Reviews>
   </div>
 </template>
 
 <script>
 import Reviews from './components/Reviews';
-import reviewitem from './components/Review-Item';
+import reviewitem from './components/ReviewItem';
 
 export default {
   name: 'App',
