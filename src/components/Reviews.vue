@@ -53,9 +53,9 @@
 
 <script>
 
-import reviewitem from './Review-Item';
+import reviewitem from './ReviewItem';
 
-const test = [];
+const reviewsAverage = [];
 
 export default {
   name: 'Reviews',
@@ -99,12 +99,12 @@ export default {
         comment: this.newReviewComment,
         rating: this.selected,
       });
-      test.push(this.selected);
+      reviewsAverage.push(this.selected);
       this.newReviewComment = '';
       this.selected = '';
     },
     average() {
-      return test.reduce((a, b) => a + b, 0) / test.length;
+      return reviewsAverage.reduce((a, b) => a + b, 0) / reviewsAverage.length;
     },
   },
 };
