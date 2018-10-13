@@ -12,26 +12,12 @@
     </div>
     </div>
 
-    <form v-on:submit.prevent="addNewComment">
-      <div class="form-row">
-        <div class="col">
-          <input class="form-control form-control-sm"
-          v-model="newReviewComment"
-          id="new-review"
-          placeholder="Add a review">
-        </div>
-        <div class="col">
-          <select v-model="selected" class="form-control form-control-sm">
-            <option v-for="option in options" v-bind:value="option.value" v-bind:key="option.key">
-              {{option.text}}
-            </option>
-          </select>
-        </div>
-        <div class="col">
-          <button class="btn btn-primary">Add</button>
-        </div>
-      </div>
-    </form>
+    <review-form
+      :reviews="reviews"
+      :rating="rating"
+      :options="options"
+      :addNewComment="addNewComment"
+    />
 
     <div class="card">
       <div class="card-header">
@@ -54,6 +40,7 @@
 <script>
 
 import reviewitem from './ReviewItem';
+import ReviewForm from './ReviewForm';
 
 const reviewsAverage = [];
 
@@ -62,13 +49,11 @@ export default {
   props: ['comment', 'rating'],
   components: {
     reviewitem,
+    ReviewForm
   },
   data() {
     return {
-      newReviewComment: '',
       reviews: [],
-      nextID: 0,
-      selected: '',
       options: [{
         text: 1,
         value: 1,
@@ -93,15 +78,13 @@ export default {
     };
   },
   methods: {
-    addNewComment() {
+    addNewComment(id, comment, rating) {
       this.reviews.push({
-        id: this.nextID + 1,
-        comment: this.newReviewComment,
-        rating: this.selected,
+        id,
+        comment,
+        rating,
       });
-      reviewsAverage.push(this.selected);
-      this.newReviewComment = '';
-      this.selected = '';
+      reviewsAverage.push(rating);
     },
     average() {
       return reviewsAverage.reduce((a, b) => a + b, 0) / reviewsAverage.length;
