@@ -5,19 +5,14 @@
     </div>
     <div class="row">
       <div class="col">
-        Total Reviews: {{reviews.length}}
+        Total Reviews: {{ reviews.length }}
       </div>
     <div class="col">
-      Average Review: {{average() || 0}}
+      Average Review: {{ getReviewsAverage }}
     </div>
     </div>
 
-    <review-form
-      :reviews="reviews"
-      :rating="rating"
-      :options="options"
-      :addNewComment="addNewComment"
-    />
+    <review-form />
 
     <div class="card">
       <div class="card-header">
@@ -38,57 +33,27 @@
 
 
 <script>
-
+import { mapActions, mapGetters } from 'vuex';
 import reviewitem from './ReviewItem';
 import ReviewForm from './ReviewForm';
 
-const reviewsAverage = [];
-
 export default {
-  name: 'Reviews',
-  props: ['comment', 'rating'],
-  components: {
-    reviewitem,
-    ReviewForm
-  },
-  data() {
-    return {
-      reviews: [],
-      options: [{
-        text: 1,
-        value: 1,
-      },
-      {
-        text: 2,
-        value: 2,
-      },
-      {
-        text: 3,
-        value: 3,
-      },
-      {
-        text: 4,
-        value: 4,
-      },
-      {
-        text: 5,
-        value: 5,
-      },
-      ],
-    };
-  },
-  methods: {
-    addNewComment(id, comment, rating) {
-      this.reviews.push({
-        id,
-        comment,
-        rating,
-      });
-      reviewsAverage.push(rating);
-    },
-    average() {
-      return reviewsAverage.reduce((a, b) => a + b, 0) / reviewsAverage.length;
-    },
-  },
+	name: 'Reviews',
+	components: {
+		reviewitem,
+		ReviewForm,
+	},
+	data: () => ({
+		reviews: [],
+	}),
+	computed: {
+		...mapGetters(['getReviews', 'getReviewsAverage', 'getOptions']),
+	},
+	methods: {
+		...mapActions(['addReview']),
+	},
+	mounted() {
+		this.reviews = this.getReviews;
+	},
 };
 </script>
