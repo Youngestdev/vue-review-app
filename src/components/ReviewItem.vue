@@ -15,10 +15,10 @@
 import StarRating from 'vue-star-rating';
 
 export default {
-  name: 'reviewitem',
-  props: ['comment', 'rating'],
-  components: {
-    StarRating,
-  },
+	name: 'reviewitem',
+	props: ['comment', 'rating'],
+	components: {
+		StarRating,
+	},
 };
 </script>
